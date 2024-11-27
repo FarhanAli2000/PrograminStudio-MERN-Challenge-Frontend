@@ -8,7 +8,7 @@ import {
   MdFavorite,
   MdSort,
 } from "react-icons/md";
-import logo from './assets/Logo.png';
+import logo from '/assets/logo.png';
 
 import Auth from "../Auth.jsx";
 import { BrowserRouter as Router } from "react-router-dom";

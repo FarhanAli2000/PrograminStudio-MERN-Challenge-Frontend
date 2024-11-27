@@ -1,4 +1,4 @@
-import logo from './src/assets/logo.png';
+import logo from '/assets/logo.png';
 import { useState } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";

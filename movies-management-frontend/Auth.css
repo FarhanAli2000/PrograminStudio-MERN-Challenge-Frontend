@@ -1,81 +1,106 @@
-/* Auth.css */
-
+/* Make the body fill the screen and center the content */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  min-height: 100vh; 
+  margin: 0; /* Remove default margin */
+  background-color: #f4f4f4; /* Optional: change background color */
   
-  .auth-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-  }
+}
+
+/* Auth Container */
+.login {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  height: 100%;
+  min-height: 50vh;
   
-  .auth-card {
-    background: #ffffff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 100%;
-    max-width: 400px;
-  }
+}
+
+/* Heading */
+h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+/* Input Styles */
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: black;
+  outline: none;
+}
+
+/* Button Styles */
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: red;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+}
+
+button[type="submit"]:hover {
+  color: black;
+}
+
+/* Toggle button */
+button[type="submit"] {
+  margin-top: 15px;
+  background-color: transparent;
+  border: none;
+  color: black;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-top: 10px;
   
-  .auth-card h2 {
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
-    color: #333;
+}
+
+h1 {
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 30px;
+}
+
+.button-row {
+  display: flex;
+  gap: 10px; /* Space between buttons */
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .login {
+    padding: 20px;
+    width: 90%;
   }
-  
-  .auth-form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .auth-input {
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-  }
-  
-  .auth-input:focus {
-    border-color: #6200ea;
-    outline: none;
-  }
-  
-  .auth-submit-btn {
-    background-color: #6200ea;
-    color: #fff;
-    padding: 0.75rem;
-    font-size: 1rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-bottom: 1rem;
-  }
-  
-  .auth-submit-btn:hover {
-    background-color: #4a00b8;
-  }
-  
-  .auth-toggle-btn {
-    background: none;
-    border: none;
-    color: #6200ea;
-    font-size: 0.9rem;
-    cursor: pointer;
-  }
-  
-  .auth-toggle-btn:hover {
-    text-decoration: underline;
-  }
-  
+}

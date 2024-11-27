@@ -8,6 +8,8 @@ import {
   MdFavorite,
   MdSort,
 } from "react-icons/md";
+import logo from './assets/Logo.png';
+
 import Auth from "../Auth.jsx";
 import { BrowserRouter as Router } from "react-router-dom";
 import axios from "axios";
@@ -25,7 +27,7 @@ const App = () => {
   const [sortCriteria, setSortCriteria] = useState("none");
   const [sortOrder, setSortOrder] = useState("asc");
   const [showFavorites, setShowFavorites] = useState(false);
-  const moviesPerPage = 10;
+  const moviesPerPage = 15;
 
   // Sorting function
   const sortMovies = (moviesList) => {
@@ -35,7 +37,7 @@ const App = () => {
       return sortedMovies.sort((a, b) => {
         const priceA = a.trackPrice ?? 0;
         const priceB = b.trackPrice ?? 0;
-        
+
         if (sortOrder === "asc") {
           return priceA - priceB;
         } else {
@@ -63,8 +65,17 @@ const App = () => {
           setHasMore(false);
         } else {
           setMovies((prevMovies) => {
-            const newMovies = [...prevMovies, ...data.results];
-            return sortMovies(newMovies);
+            // Filter out any movies that are already in the list
+            const newMovies = data.results.filter(
+              (movie) =>
+                !prevMovies.some(
+                  (prevMovie) => prevMovie.trackId === movie.trackId
+                )
+            );
+
+            // Sort and append the new movies
+            const updatedMovies = [...prevMovies, ...newMovies];
+            return sortMovies(updatedMovies);
           });
         }
       } catch (error) {
@@ -73,6 +84,7 @@ const App = () => {
         setIsLoading(false);
       }
     };
+
     fetchMovies();
   }, [currentPage, hasMore, sortOrder]);
 
@@ -173,7 +185,8 @@ const App = () => {
           <h3>Watch Trailer</h3>
           <video width="560" height="315" controls>
             <source src={movie.trackVideoUrl} type="video/mp4" />
-            Your browser does not support the video tag. Please use a browser that supports HTML5 video.
+            Your browser does not support the video tag. Please use a browser
+            that supports HTML5 video.
           </video>
         </div>
       );
@@ -186,9 +199,21 @@ const App = () => {
     );
   };
 
+  // Related movies based on genre
+  const getRelatedMovies = (selectedMovie) => {
+    if (!selectedMovie || !selectedMovie.primaryGenreName) return [];
+    return movies.filter(
+      (movie) =>
+        movie.primaryGenreName === selectedMovie.primaryGenreName &&
+        movie.trackId !== selectedMovie.trackId // Exclude the current movie
+    );
+  };
+
   return (
     <Router>
       <div className={`container ${isDarkMode ? "dark" : ""}`}>
+      <div className="header-container">
+      <img src={logo} alt="App Logo" className="logo" />
         <h1>iTunes Movies</h1>
         <div className="header">
           <button
@@ -197,8 +222,9 @@ const App = () => {
               setToken(null);
             }}
           >
-            Logout
+            Logout 
           </button>
+          </div>
           <MdFavorite
             className="favorite-icon"
             onClick={() => setShowFavorites(!showFavorites)}
@@ -266,54 +292,83 @@ const App = () => {
             {/* Movie Detail View */}
             {selectedMovie ? (
               <div className="detail-screen">
-                <button
-                  className="close-button"
-                  onClick={handleBackToMovies}
-                >
-                  Back to Movies
-                </button>
-                <h2>{selectedMovie.trackName}</h2>
-                <p>{selectedMovie.longDescription || "No description available"}</p>
-                <p>Release Date: {selectedMovie.releaseDate}</p>
-                <img
-                  src={selectedMovie.artworkUrl100}
-                  alt={selectedMovie.trackName}
-                />
-
-                {/* Video Section */}
+                <div style={{display: "flex", justifyContent: "space-between"}}>
+                  <h2>{selectedMovie.trackName}</h2>
+                  <button className="close-button" onClick={handleBackToMovies}>
+                    Back to Movies
+                  </button>
+                </div>
+                <div style={{display: "flex"}}>
+                  <img
+                    src={selectedMovie.artworkUrl100}
+                    alt={selectedMovie.trackName}
+                  />
+                  <div style={{marginLeft: "20px"}}>
+                    <p>
+                      {selectedMovie.longDescription || "No description available"}
+                    </p>
+                    <p><b>Release Date: </b>{selectedMovie.releaseDate}</p>
+                  </div>
+                </div>
                 {renderVideo(selectedMovie)}
+
+                {/* Related Movies Section */}
+                <div className="related-movies">
+                  <h3>Related Movies</h3>
+                  <div className={`grid ${viewMode}`}>
+                    {getRelatedMovies(selectedMovie).map(
+                      (relatedMovie, index) => (
+                        <div
+                          className="card"
+                          key={index}
+                          onClick={() => handleMovieClick(relatedMovie)}
+                        >
+                          <img
+                            src={relatedMovie.artworkUrl100}
+                            alt={relatedMovie.trackName}
+                          />
+                          <div className="details">
+                            <h2>{relatedMovie.trackName}</h2>
+                            <p>
+                              Genre: {relatedMovie.primaryGenreName || "N/A"}
+                            </p>
+                            <p>
+                              Price:{" "}
+                              {relatedMovie.trackPrice
+                                ? `$${relatedMovie.trackPrice}`
+                                : "Free"}
+                            </p>
+                          </div>
+                        </div>
+                      )
+                    )}
+                  </div>
+                </div>
               </div>
             ) : (
-              <>
-                <div className={`grid ${viewMode}`}>
-                  {movies.map((movie, index) => (
-                    <div
-                      className="card"
-                      key={index}
-                      onClick={() => handleMovieClick(movie)}
-                    >
-                      <img src={movie.artworkUrl100} alt={movie.trackName} />
-                      <div className="details">
-                        <h2>{movie.trackName}</h2>
-                        <p>Genre: {movie.primaryGenreName || "N/A"}</p>
-                        <p>
-                          Price:{" "}
-                          {movie.trackPrice
-                            ? `$${movie.trackPrice}`
-                            : "Free"}
-                        </p>
-                      </div>
-                      <MdFavorite
-                        className="favorite-icon"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          addToFavorites(movie);
-                        }}
-                      />
+              // Movie Grid/List View
+              <div className={`grid ${viewMode}`}>
+                {movies.map((movie, index) => (
+                  <div
+                    className="card"
+                    key={index}
+                    onClick={() => handleMovieClick(movie)}
+                  >
+                    <img src={movie.artworkUrl100} alt={movie.trackName} />
+                    <div className="details">
+                      <h2>{movie.trackName}</h2>
+                      <p>Genre: {movie.primaryGenreName || "N/A"}</p>
+                      <p>
+                        Price:{" "}
+                        {movie.trackPrice ? `$${movie.trackPrice}` : "Free"}
+                      </p>
+                      <button onClick={() => addToFavorites(movie)}>
+                        Add to Favorites
+                      </button>
                     </div>
-                  ))}
-                </div>
-              </>
+                  </div>
+                ))}
+              </div>
             )}
           </>
         )}
@@ -323,3 +378,6 @@ const App = () => {
 };
 
 export default App;
+
+
+

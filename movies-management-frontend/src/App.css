@@ -6,6 +6,7 @@ body.dark {
 
 .container {
   padding: 20px;
+
 }
 
 .view-icons {
@@ -66,7 +67,7 @@ body.dark {
 
 .card .details p {
   margin: 0;
-  color: #555;
+  color: white;
 }
 
 /* Loader Styles */
@@ -101,7 +102,7 @@ body.dark {
 
 .card .details p {
   margin: 0; /* Remove paragraph margins */
-  color: #555; /* Optional: lighter text color */
+  color:#121212; /* Optional: lighter text color */
 }
 
 /* Controls and Sorting */
@@ -163,38 +164,6 @@ button:hover {
   }
 }
 
-/* Detail Screen Styles */
-/* .detail-screen {
-  padding: 20px;
-}
-
-.detail-screen .close-button {
-  background-color: #ff6347;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.detail-screen .close-button:hover {
-  background-color: #e04e3b;
-}
-
-.detail-screen h2 {
-  margin-bottom: 20px;
-}
-
-.detail-screen img {
-  width: 100%;
-  border-radius: 5px;
-}
-
-.detail-screen p {
-  font-size: 1.1rem;
-  line-height: 1.5;
-  color: #333;
-} */
 
 
 
@@ -209,11 +178,11 @@ button:hover {
 }
 
 .detail-screen .close-button {
-  background-color: #ff6347;
+  background-color:#e04343;
   color: white;
-  padding: 10px 20px;
   border: none;
   border-radius: 5px;
+  height: 40px;
   cursor: pointer;
   font-size: 1rem;
   transition: background-color 0.3s ease;
@@ -231,11 +200,11 @@ button:hover {
 }
 
 .detail-screen img {
-  width: 100%;
+  width: 200px;
+  height: 200px;
   max-width: 400px; /* Limit image width for larger screens */
   margin-bottom: 20px;
   border-radius: 10px;
-  height: 400px;
 }
 
 .detail-screen .details {
@@ -292,3 +261,286 @@ button:hover {
 .detail-screen .back-to-movies:hover {
   background-color: #2980b9;
 }
+
+
+.related-movies .card {
+  display: flex;
+  flex-direction: column; /* Ensures image is on top */
+  align-items: center; /* Centers content */
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.related-movies .card img {
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #ddd; /* Adds a subtle separation between image and details */
+}
+
+.related-movies .card .details {
+  padding: 10px;
+  text-align: center;
+}
+
+.related-movies .card .details h2 {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333; /* Darker color for better readability */
+  margin-bottom: 8px;
+}
+
+.related-movies .card .details p {
+  font-size: 0.875rem;
+  color: #555;
+  margin: 5px 0;
+}
+
+.related-movies .card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+
+
+/*    h1 styling          /*
+/* Style for the h1 heading */
+h1 {
+  font-size: 2.5rem; /* Set font size */
+  color:#121212; /* Text color for light mode */
+  margin-bottom: 0px; /* Add some space below the heading */
+  font-family: 'Arial', sans-serif; /* Change the font family */
+  letter-spacing: 1px; /* Add letter spacing */
+ text-align: center;
+}
+
+/* Dark mode styles for h1 */
+/* Card Styles */
+
+body.dark h1 {
+  color: #f0f0f0; /* Lighter text color for dark mode */
+}
+
+
+
+/* Style for the logout button */
+/* Style for the header */
+.header {
+  display: flex; /* Use flexbox to align items */
+  justify-content: space-between; /* Distribute items with space between */
+  align-items: center; /* Vertically center items */
+  padding: 10px 20px; /* Add some padding for spacing */
+}
+
+button {
+  background-color: #ff4d4d; /* Red background color */
+  color: white; /* White text color */
+  border: none; /* Remove border */
+  padding: 10px 20px; /* Add padding for better clickability */
+  font-size: 1rem; /* Set font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transition effects */
+}
+
+/* Hover effect for the logout button */
+button:hover {
+  background-color: #ff1a1a; /* Darker red on hover */
+  transform: scale(1.05); /* Slightly increase size when hovered */
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(255, 77, 77, 0.8);
+}
+
+/* Dark mode styling for the logout button */
+body.dark button {
+  background-color: #ff6666; /* Lighter red for dark mode */
+}
+
+body.dark button:hover {
+  background-color: #ff3333; /* Darker red on hover in dark mode */
+}
+
+button {
+  background-color: #ff4d4d; /* Red background color */
+  color: white; /* White text color */
+  border: none; /* Remove border */
+  padding: 10px 20px; /* Add padding for better clickability */
+  font-size: 1rem; /* Set font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transition effects */
+}
+
+/* Hover effect for the logout button */
+button:hover {
+  background-color: #ff1a1a; /* Darker red on hover */
+  transform: scale(1.05); /* Slightly increase size when hovered */
+}
+
+/* Focus style for accessibility */
+button:focus {
+  outline: none; /* Remove default focus outline */
+  box-shadow: 0 0 5px rgba(255, 77, 77, 0.8); /* Add custom focus outline */
+}
+
+/* Dark mode styling for the logout button */
+body.dark button {
+  background-color: #ff6666; /* Lighter red for dark mode */
+}
+
+body.dark button:hover {
+  background-color: #ff3333; /* Darker red on hover in dark mode */
+}
+
+
+.controls {
+  display: flex; /* Use flexbox to align items */
+  justify-content: space-between; /* Align items to the right */
+  align-items: start; /* Vertically center the items */
+  padding: 10px 20px; /* Optional: Add padding for spacing */
+  margin-bottom: 20px;
+}
+
+/* Style for the view-icons container */
+
+
+/* Active icon styles */
+.view-icons .active {
+  color: #ff4d4d; /* Active icon color */
+}
+
+.view-icons svg {
+  font-size: 24px; /* Set default icon size */
+  transition: transform 0.3s; /* Smooth transition for hover effect */
+}
+
+.view-icons svg:hover {
+  transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+
+/* Logout button */
+
+/* Style for the header */
+.header {
+  display: flex; /* Use flexbox for layout */
+  align-items:end; /* Vertically center the items */
+  justify-content: end;
+  justify-items: end;
+  padding: 10px 20px; /* Optional: Add padding */
+}
+
+/* Style for the logout button */
+.header button {
+  background-color: #ff4d4d; /* Optional: Set background color */
+  color: white; /* Button text color */
+  border: 1px solid black; /* Remove border */
+  padding: 8px 15px; /* Button padding */
+  cursor: pointer; /* Pointer cursor */
+  font-size: 16px; /* Font size */
+  border-radius: 5px; /* Rounded corners */
+  
+  
+  
+}
+
+.header button:hover {
+  background-color: #e04343; /* Darker shade when hovered */
+}
+
+.header button:focus {
+  outline: none; /* Remove focus outline */
+}
+
+
+
+/* Style for the logo */
+.logo {
+  margin-top: 16px;
+  height: 50px; /* Set height to a fixed value */
+  width: auto;  /* Ensure aspect ratio is maintained */
+  margin-right: 20px; /* Add space to the right of the logo */
+  margin-bottom: 4px;
+}
+
+
+/* .header-container.dark{
+color:white;
+background-color: #121212;
+} */
+
+
+.header-container {
+  display: flex;
+  align-items: center; /* Aligns items vertically in the center */
+  justify-content: space-between; /* Adds space between the logo, title, and button */
+  padding: 0px; /* Optional: Adds some padding around the container */
+  background-color: #f8f9fa; /* Optional: Background color */
+}
+
+
+
+h1 {
+  margin: 0;
+  font-size: 24px; /* Adjust the title font size */
+  flex-grow: 1; /* Ensures the title takes up the space in between */
+  text-align: center; /* Centers the heading text */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.controls .sort {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between elements in the sort section */
+}
+
+.sort button {
+  margin-left: auto; /* Push button to the left */
+}
+
+.view-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px; /* Space between icons */
+  flex-grow: 1; /* Allow the view icons to take center position */
+}
+
+/* Center sort dropdown and grid/list icons */
+.sort {
+  margin: 0 auto;
+  text-align:start;
+}
+
+.sort select {
+  margin: 0 10px;
+}
+
+.view-icons {
+  order: 0;
+}
+
+
+.favorite-icon {
+  font-size: 30px; /* Set the size you want */
+  cursor: pointer;
+}
+
+
+

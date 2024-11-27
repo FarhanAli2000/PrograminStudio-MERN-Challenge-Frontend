@@ -13,7 +13,7 @@ const Auth = ({ setToken }) => {
     e.preventDefault();
     const endpoint = isLogin ? "/login" : "/register";
     try {
-      const { data } = await axios.post(`http://localhost:5000${endpoint}`, { email, password });
+      const { data } = await axios.post(`https://programinstudio-mern-challenge-backend.onrender.com${endpoint}`, { email, password });
       if (isLogin) {
         console.log("Setting token:", data.token);
         setToken(data.token);

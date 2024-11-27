@@ -143,7 +143,7 @@ const App = () => {
   const addToFavorites = async (movie) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.post("http://localhost:5000/favorites", { token, movie });
+      await axios.post("https://programinstudio-mern-challenge-backend.onrender.com/favorites", { token, movie });
       setFavorites((prevFavorites) => [...prevFavorites, movie]);
       alert("Movie added to favorites");
     } catch (error) {
